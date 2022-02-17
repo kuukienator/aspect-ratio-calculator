@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./styles.css" />
+        <title>Aspect ratio calculator</title>
+    </head>
+    <body>
+        <h1>(Image) aspect ratio calculator</h1>
+        <label class="drop-zone-text">
+            <input
+                type="file"
+                class="file-upload-input"
+                accept="image/png, image/jpeg"
+            />
+            <div>Drop image/click here for upload</div>
+            <div><i>or</i></div>
+            <div>
+                Enter resolution:
+                <input type="number" class="resolution-x" value="1920" /> x
+                <input type="number" class="resolution-y" value="1080" />
+            </div>
+        </label>
+        <canvas class="image-canvas hidden"></canvas>
+        <div class="main-ui">
+            <div class="image-resolution-container hidden">
+                <span>Resolution: </span><span class="image-resolution"></span>
+            </div>
+            <div class="image-aspect-ratio-container hidden">
+                <span>Aspect ratio: </span
+                ><span class="image-aspect-ratio"></span>
+            </div>
+            <button class="reset-button">Reset</button>
+        </div>
+        <script src="/app.mjs" type="module"></script>
+    </body>
+</html>

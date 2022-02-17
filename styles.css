@@ -1,0 +1,101 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, monospace;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.drop-zone-text {
+    border: 0.5rem solid #a855f7;
+    height: 60vh;
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    box-sizing: border-box;
+    flex-direction: column;
+    border-radius: 2rem;
+    cursor: pointer;
+}
+
+.drop-zone-text > * {
+    margin-bottom: 1rem;
+}
+
+.drop-zone-text input {
+    font-size: 2.5rem;
+    width: 10rem;
+    border-color: #a855f7;
+    border-radius: 1rem;
+    padding: 0rem 1rem;
+    border-width: 4px;
+}
+
+.file-upload-input {
+    display: none;
+}
+
+.drop-zone-text.file-hover {
+    border: 0.5rem dotted #a855f7;
+}
+
+.image-canvas {
+    width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+}
+
+.main-ui {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    gap: 0.5rem;
+}
+
+.main-ui button {
+    margin-top: 2rem;
+}
+
+.image-resolution,.image-aspect-ratio {
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    background-color: #a855f7;
+    border: 1px solid #c084fc;
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+}
+
+button:hover {
+    background-color: #581c87;
+}
+
+button:active {
+    background-color: #c084fc;
+}
+
+.image-resolution-container, .image-aspect-ratio-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
