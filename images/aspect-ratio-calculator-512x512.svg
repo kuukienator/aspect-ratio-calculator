@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="200mm"
+   height="200mm"
+   viewBox="0 0 200 200"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="logo-aspect-ratio-1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.77682379"
+     inkscape:cx="397.12996"
+     inkscape:cy="458.92003"
+     inkscape:window-width="1846"
+     inkscape:window-height="1057"
+     inkscape:window-x="66"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#581c87;fill-opacity:1;stroke:none;stroke-width:7.0923;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect27171"
+       width="200"
+       height="200"
+       x="0"
+       y="0"
+       ry="36.021481"
+       rx="0"
+       inkscape:export-filename="C:\Users\Emmanuel Meinike\Desktop\aspect-ratio-calculator-192x192.png"
+       inkscape:export-xdpi="24.379999"
+       inkscape:export-ydpi="24.379999" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:5.29167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect1120"
+       width="140"
+       height="100"
+       x="30"
+       y="50"
+       ry="22.819954"
+       inkscape:export-filename="C:\Users\Emmanuel Meinike\Desktop\aspect-ratio-calculator-192x192.png"
+       inkscape:export-xdpi="24.379999"
+       inkscape:export-ydpi="24.379999" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:47.1986px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.17997"
+       x="65.289932"
+       y="59.79924"
+       id="text2268"
+       transform="scale(0.7403921,1.3506357)"><tspan
+         id="tspan2266"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:47.1986px;font-family:Candara;-inkscape-font-specification:'Candara, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:1.17997"
+         x="65.289932"
+         y="59.79924"
+         sodipodi:role="line" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:12.6149px;line-height:1.25;font-family:sans-serif;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.315374"
+       x="54.440178"
+       y="106.54893"
+       id="text8980"
+       transform="scale(0.89583483,1.1162772)"
+       inkscape:export-filename="C:\Users\Emmanuel Meinike\Desktop\aspect-ratio-calculator-192x192.png"
+       inkscape:export-xdpi="24.379999"
+       inkscape:export-ydpi="24.379999"><tspan
+         sodipodi:role="line"
+         id="tspan8978"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:63.0746px;font-family:'Fira Code';-inkscape-font-specification:'Fira Code, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke-width:0.315374"
+         x="54.440178"
+         y="106.54893">3:_</tspan></text>
+  </g>
+</svg>

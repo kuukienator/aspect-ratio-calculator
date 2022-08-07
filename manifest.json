@@ -1,0 +1,34 @@
+{
+    "short_name": "Aspect Ratio Calculator",
+    "name": "(Image) Aspect Ratio Calculator",
+    "icons": [
+        {
+            "src": "/images/aspect-ratio-calculator-512x512.svg",
+            "type": "image/svg+xml",
+            "sizes": "756x756"
+        },
+        {
+            "src": "/images/aspect-ratio-calculator-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/images/aspect-ratio-calculator-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#581c87",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#581c87",
+    "description": "Calculate aspect ratios of images or resolutions.",
+    "screenshots": [
+        {
+            "src": "/images/screenshot-1.png",
+            "type": "image/png",
+            "sizes": "1081x2142"
+        }
+    ]
+}
