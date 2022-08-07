@@ -15,10 +15,23 @@ const resolutionYInput = document.querySelector('.resolution-y');
 const resetButton = document.querySelector('.reset-button');
 const fileUploadInput = document.querySelector('.file-upload-input');
 const colorSchemeButton = document.querySelector('.color-scheme-switch');
+const notificationElement = document.querySelector('.notification');
 
 const DEFAULT_WIDTH = 1920;
 const DEFAULT_HEIGHT = 1080;
-const DEFAULT_COLOR_SCHEME = 'dark';
+const COLOR_SCHEME_MAP = {
+    dark: {
+        name: 'dark',
+        className: 'color-scheme-dark',
+    },
+    light: {
+        name: 'light',
+        className: 'color-scheme-light',
+    },
+};
+const DEFAULT_COLOR_SCHEME = COLOR_SCHEME_MAP.dark.name;
+
+let notificationTimeout = null;
 
 const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
 
@@ -79,6 +92,7 @@ const updateUI = (width, height, resolutionElement, aspectRatioElement) => {
 
     resolutionElement.textContent = `${width} x ${height}`;
     aspectRatioElement.textContent = `${minAspectRatio} ${prettyAspectRatio}`;
+    aspectRatioElement.dataset.aspectRatio = minAspectRatio;
 };
 
 const processFiles = async (files) => {
@@ -119,20 +133,41 @@ const getCurrentColorSchemeMode = () =>
     window.localStorage.getItem('ARC:colorSchmeMode') || DEFAULT_COLOR_SCHEME;
 const setCurrentColorSchemeMode = (value) => {
     window.localStorage.setItem('ARC:colorSchmeMode', value);
-    root.classList.remove(...['color-scheme-dark', 'color-scheme-light']);
-    root.classList.add(
-        getCurrentColorSchemeMode() === 'dark'
-            ? 'color-scheme-dark'
-            : 'color-scheme-light'
+    root.classList.remove(
+        ...[COLOR_SCHEME_MAP.dark.className, COLOR_SCHEME_MAP.light.className]
     );
+    root.classList.add(
+        getCurrentColorSchemeMode() === COLOR_SCHEME_MAP.dark.name
+            ? COLOR_SCHEME_MAP.dark.className
+            : COLOR_SCHEME_MAP.light.className
+    );
+};
+
+const copyToClipboard = (value) => {
+    navigator.clipboard.writeText(value).then(() => {
+        notificationElement.textContent = `Copied "${value}" to clipboard!`;
+        notificationElement.classList.remove('hide');
+        notificationElement.classList.add('show');
+
+        if (notificationTimeout) clearTimeout(notificationTimeout);
+
+        notificationTimeout = setTimeout(() => {
+            notificationElement.classList.remove('show');
+            notificationElement.classList.add('hide');
+            notificationTimeout = null;
+        }, 3000);
+    });
 };
 
 setCurrentColorSchemeMode(getCurrentColorSchemeMode());
 
 colorSchemeButton.addEventListener('click', () => {
-    console.log('click', getCurrentColorSchemeMode());
     const currentScheme = getCurrentColorSchemeMode();
-    setCurrentColorSchemeMode(currentScheme === 'dark' ? 'light' : 'dark');
+    setCurrentColorSchemeMode(
+        currentScheme === COLOR_SCHEME_MAP.dark.name
+            ? COLOR_SCHEME_MAP.light.name
+            : COLOR_SCHEME_MAP.dark.name
+    );
 });
 
 dropZone.addEventListener('drop', (e) => {
@@ -174,5 +209,13 @@ resolutionXInput.addEventListener('focus', (e) => e.target.select());
 resolutionYInput.addEventListener('focus', (e) => e.target.select());
 
 resetButton.addEventListener('click', () => init());
+
+imageResolution.addEventListener('click', (e) => {
+    copyToClipboard(e.target.textContent);
+});
+
+imageAspectRatio.addEventListener('click', (e) => {
+    copyToClipboard(e.target.dataset.aspectRatio);
+});
 
 init();
