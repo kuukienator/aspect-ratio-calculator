@@ -18,7 +18,7 @@
             "sizes": "512x512"
         }
     ],
-    "start_url": "/",
+    "start_url": "/aspect-ratio-calculator/",
     "background_color": "#581c87",
     "display": "standalone",
     "scope": "/",
