@@ -116,9 +116,9 @@ const init = () => {
 };
 
 const getCurrentColorSchemeMode = () =>
-    window.localStorage.getItem('colorSchmeMode') || DEFAULT_COLOR_SCHEME;
+    window.localStorage.getItem('ARC:colorSchmeMode') || DEFAULT_COLOR_SCHEME;
 const setCurrentColorSchemeMode = (value) => {
-    window.localStorage.setItem('colorSchmeMode', value);
+    window.localStorage.setItem('ARC:colorSchmeMode', value);
     root.classList.remove(...['color-scheme-dark', 'color-scheme-light']);
     root.classList.add(
         getCurrentColorSchemeMode() === 'dark'
