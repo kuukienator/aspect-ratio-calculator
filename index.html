@@ -4,23 +4,89 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Calculate aspect ratios of images or resolutions."
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" href="./styles.css" />
         <title>Aspect ratio calculator</title>
     </head>
     <body>
-        <h1>(Image) aspect ratio calculator</h1>
+        <header>
+            <h1>(Image) aspect ratio calculator</h1>
+            <span
+                role="button"
+                aria-label="Color scheme switch"
+                class="color-scheme-switch"
+            >
+                <svg
+                    class="light"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-toggle-left"
+                >
+                    <rect
+                        x="1"
+                        y="5"
+                        width="22"
+                        height="14"
+                        rx="7"
+                        ry="7"
+                    ></rect>
+                    <circle cx="8" cy="12" r="3"></circle>
+                </svg>
+                <svg
+                    class="dark"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-toggle-right"
+                >
+                    <rect
+                        x="1"
+                        y="5"
+                        width="22"
+                        height="14"
+                        rx="7"
+                        ry="7"
+                    ></rect>
+                    <circle cx="16" cy="12" r="3"></circle>
+                </svg>
+            </span>
+        </header>
         <label class="drop-zone-text">
             <input
                 type="file"
                 class="file-upload-input"
                 accept="image/png, image/jpeg"
             />
-            <div>Drop image/click here for upload</div>
-            <div><i>or</i></div>
-            <div>
-                Enter resolution:
-                <input type="number" class="resolution-x" value="1920" /> x
-                <input type="number" class="resolution-y" value="1080" />
+            <div class="no-events">Drop image/click here for upload</div>
+            <div class="or no-events">or</div>
+            <div class="no-events">
+                <p>Enter resolution:</p>
+                <div>
+                    <input type="number" class="resolution-x" value="1920" /> x
+                    <input type="number" class="resolution-y" value="1080" />
+                </div>
             </div>
         </label>
         <canvas class="image-canvas hidden"></canvas>
@@ -34,6 +100,14 @@
             </div>
             <button class="reset-button">Reset</button>
         </div>
+        <footer>
+            <a
+                href="https://twitter.com/kuukienator"
+                target="_blank"
+                rel="noopener"
+                >@kuukienator</a
+            >
+        </footer>
         <script src="./app.js" type="module"></script>
     </body>
 </html>

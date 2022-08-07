@@ -1,28 +1,63 @@
+:root.color-scheme-light {
+    --main-color: #a855f7;
+    --main-color-dark: #581c87;
+    --main-color-light: #d8b4fe; 
+    --main-color-lighter: #c084fc;
+    --background-color: #f3f4f6;
+    --text-color-main: #1f2937;
+}
+
+:root.color-scheme-dark {
+    --main-color: #6b21a8;
+    --main-color-dark: #581c87;
+    --main-color-light: #9333ea; 
+    --main-color-lighter: #c084fc;
+    --background-color: #1f2937;
+    --text-color-main: #f3f4f6;
+}
+
+/*
+@media (prefers-color-scheme: dark) {
+    :root {
+        --main-color: #6b21a8;
+        --main-color-dark: #581c87;
+        --main-color-light: #9333ea; 
+        --main-color-lighter: #c084fc;
+        --background-color: #1f2937;
+        --text-color-main: #f3f4f6;
+    }
+}
+*/
+
 body {
     padding: 0;
     margin: 0;
-    font-family: Verdana, monospace;
+    font-family: 'Roboto Mono', monospace;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100vw;
-    height: 100vh;
+    color: var(--text-color-main);
+    background-color: var(--background-color);
 }
 
 .drop-zone-text {
-    border: 0.5rem solid #a855f7;
-    height: 60vh;
+    border: 0.5rem solid var(--main-color);
+    height: 50vh;
     width: 80vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     box-sizing: border-box;
     flex-direction: column;
     border-radius: 2rem;
     cursor: pointer;
+    text-align: center;
+    padding: 0.5rem;
+    background-color: var(--main-color-light);
 }
 
 .drop-zone-text > * {
@@ -30,12 +65,17 @@ body {
 }
 
 .drop-zone-text input {
-    font-size: 2.5rem;
-    width: 10rem;
-    border-color: #a855f7;
+    font-size: 1.5rem;
+    width: 20vw;
+    border-style: solid;
+    border-color: var(--main-color);
     border-radius: 1rem;
-    padding: 0rem 1rem;
+    padding: 0.2rem 0.5rem;
     border-width: 4px;
+    background-color: var(--main-color-light);
+    font-family: inherit;
+    pointer-events: all;
+    color: var(--text-color-main)
 }
 
 .file-upload-input {
@@ -43,24 +83,27 @@ body {
 }
 
 .drop-zone-text.file-hover {
-    border: 0.5rem dotted #a855f7;
+    border: 0.5rem dotted var(--main-color);
 }
 
 .image-canvas {
-    width: 100%;
+    max-width: 80vw;
     max-height: 60vh;
     object-fit: contain;
+    border-radius: 1rem;
+    border: 0.5rem solid var(--main-color);
 }
 
 .main-ui {
     margin-top: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 400px;
+    width: 80vw;
     gap: 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .main-ui button {
@@ -76,21 +119,22 @@ body {
 }
 
 button {
-    background-color: #a855f7;
-    border: 1px solid #c084fc;
+    background-color: var(--main-color);
+    border-width: 0;
     padding: 0.5rem 2rem;
     border-radius: 0.5rem;
     font-size: 1.5rem;
     cursor: pointer;
     color: white;
+    font-family: inherit;
 }
 
 button:hover {
-    background-color: #581c87;
+    background-color: var(--main-color-dark);
 }
 
 button:active {
-    background-color: #c084fc;
+    background-color: var(--main-color-lighter);
 }
 
 .image-resolution-container, .image-aspect-ratio-container {
@@ -98,4 +142,85 @@ button:active {
     display: flex;
     justify-content: space-between;
     align-items: center;    
+}
+
+h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 5rem;
+}
+
+.or {
+    font-weight: bold;
+}
+
+.no-events {
+    pointer-events: none;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 1rem;
+    font-family: 'Roboto Mono', monospace;
+}
+
+footer a {
+    color: var(--text-color-main)
+}
+
+svg {
+    height: 3rem;
+    width: 3rem;
+}
+
+:root.color-scheme-light svg.dark {
+    display: none;
+}
+
+:root.color-scheme-dark svg.light {
+    display: none;
+}
+
+span[role="button"] {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+}
+
+@media (min-width: 960px) {
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .drop-zone-text, .image-canvas, .main-ui {
+        max-width: 60vw;
+    }
+
+    .drop-zone-text input {
+        width: 10vw;
+    }
+
+    span[role="button"] {
+        top: 2rem;
+        right: 2rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .drop-zone-text, .main-ui {
+        max-width: 40vw;
+    }
+}
+
+@media (min-height: 800px) {
+    footer {
+        position: fixed;
+    }
 }

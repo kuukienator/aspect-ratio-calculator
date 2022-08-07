@@ -1,4 +1,5 @@
-const dropZone = document.querySelector('body');
+const root = document.querySelector(':root');
+const dropZone = document.querySelector('.drop-zone-text');
 const dropZoneText = document.querySelector('.drop-zone-text');
 const imageCanvas = document.querySelector('.image-canvas');
 const imageResolution = document.querySelector('.image-resolution');
@@ -13,9 +14,11 @@ const resolutionXInput = document.querySelector('.resolution-x');
 const resolutionYInput = document.querySelector('.resolution-y');
 const resetButton = document.querySelector('.reset-button');
 const fileUploadInput = document.querySelector('.file-upload-input');
+const colorSchemeButton = document.querySelector('.color-scheme-switch');
 
 const DEFAULT_WIDTH = 1920;
 const DEFAULT_HEIGHT = 1080;
+const DEFAULT_COLOR_SCHEME = 'dark';
 
 const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
 
@@ -112,6 +115,26 @@ const init = () => {
     imageCanvas.classList.add('hidden');
 };
 
+const getCurrentColorSchemeMode = () =>
+    window.localStorage.getItem('colorSchmeMode') || DEFAULT_COLOR_SCHEME;
+const setCurrentColorSchemeMode = (value) => {
+    window.localStorage.setItem('colorSchmeMode', value);
+    root.classList.remove(...['color-scheme-dark', 'color-scheme-light']);
+    root.classList.add(
+        getCurrentColorSchemeMode() === 'dark'
+            ? 'color-scheme-dark'
+            : 'color-scheme-light'
+    );
+};
+
+setCurrentColorSchemeMode(getCurrentColorSchemeMode());
+
+colorSchemeButton.addEventListener('click', () => {
+    console.log('click', getCurrentColorSchemeMode());
+    const currentScheme = getCurrentColorSchemeMode();
+    setCurrentColorSchemeMode(currentScheme === 'dark' ? 'light' : 'dark');
+});
+
 dropZone.addEventListener('drop', (e) => {
     e.preventDefault();
     const files = e.dataTransfer.files;
@@ -146,6 +169,9 @@ resolutionYInput.addEventListener('input', (e) => {
     const width = Number(resolutionXInput.value);
     updateUI(width, height, imageResolution, imageAspectRatio);
 });
+
+resolutionXInput.addEventListener('focus', (e) => e.target.select());
+resolutionYInput.addEventListener('focus', (e) => e.target.select());
 
 resetButton.addEventListener('click', () => init());
 
