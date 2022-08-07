@@ -243,7 +243,7 @@ span[role="button"] {
     }
 }
 
-@media (min-height: 800px) {
+@media (min-height: 900px) {
     footer {
         position: fixed;
     }
