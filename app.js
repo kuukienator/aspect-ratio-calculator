@@ -12,6 +12,7 @@ const imageAspectRatioContainer = document.querySelector(
 );
 const resolutionXInput = document.querySelector('.resolution-x');
 const resolutionYInput = document.querySelector('.resolution-y');
+const resolutionInputForm = document.querySelector('.resolution-input-form');
 const resetButton = document.querySelector('.reset-button');
 const fileUploadInput = document.querySelector('.file-upload-input');
 const colorSchemeButton = document.querySelector('.color-scheme-switch');
@@ -207,6 +208,13 @@ resolutionYInput.addEventListener('input', (e) => {
 
 resolutionXInput.addEventListener('focus', (e) => e.target.select());
 resolutionYInput.addEventListener('focus', (e) => e.target.select());
+
+resolutionInputForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    resolutionXInput.blur();
+    resolutionYInput.blur();
+});
 
 resetButton.addEventListener('click', () => init());
 
