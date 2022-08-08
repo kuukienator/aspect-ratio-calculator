@@ -3,7 +3,7 @@
     --main-color-dark: #581c87;
     --main-color-light: #d8b4fe; 
     --main-color-lighter: #c084fc;
-    --background-color: #f3f4f6;
+    --background-color: #f5f5f4;
     --text-color-main: #1f2937;
 }
 
@@ -13,7 +13,7 @@
     --main-color-light: #9333ea; 
     --main-color-lighter: #c084fc;
     --background-color: #1f2937;
-    --text-color-main: #f3f4f6;
+    --text-color-main: #f5f5f4;
 }
 
 body {
@@ -174,8 +174,9 @@ div[role="button"] >span {
     background-color: var(--main-color);
     color: white;
     padding: 0.5rem;
-    top: -40px;
+    top: -4rem;
     transition: all 0.3s ease-in-out;
+    border-radius: 0.5rem;
 }
 
 .notification.show {
@@ -183,7 +184,7 @@ div[role="button"] >span {
 }
 
 .notification.hide {
-    top: -40px; 
+    top: -4rem; 
 }
 
 @media (min-width: 960px) {

@@ -32,7 +32,7 @@ const COLOR_SCHEME_MAP = {
     },
 };
 const DEFAULT_COLOR_SCHEME = COLOR_SCHEME_MAP.dark.name;
-const NOTIFICATION_SHOW_TIME = 3000;
+const NOTIFICATION_SHOW_TIME = 2000;
 let notificationTimeout = null;
 
 const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
@@ -67,6 +67,8 @@ const init = () => {
         imageResolution,
         imageAspectRatio
     );
+
+    resolutionXInput.focus();
 };
 
 const getCurrentColorSchemeMode = () =>
