@@ -32,17 +32,10 @@ const COLOR_SCHEME_MAP = {
     },
 };
 const DEFAULT_COLOR_SCHEME = COLOR_SCHEME_MAP.dark.name;
-
+const NOTIFICATION_SHOW_TIME = 3000;
 let notificationTimeout = null;
 
 const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
-
-const isValidFile = (file) => file && file.type.startsWith('image/');
-
-const showUI = (resolutionContainer, aspectRatioContainer) => {
-    resolutionContainer.classList.remove('hidden');
-    aspectRatioContainer.classList.remove('hidden');
-};
 
 const updateUI = (width, height, resolutionElement, aspectRatioElement) => {
     const aspectRatio = (width / height).toFixed(3);
@@ -74,11 +67,11 @@ const init = () => {
         imageResolution,
         imageAspectRatio
     );
-    showUI(imageResolutionContainer, imageAspectRatioContainer);
 };
 
 const getCurrentColorSchemeMode = () =>
     window.localStorage.getItem('ARC:colorSchmeMode') || DEFAULT_COLOR_SCHEME;
+
 const setCurrentColorSchemeMode = (value) => {
     window.localStorage.setItem('ARC:colorSchmeMode', value);
     root.classList.remove(
@@ -103,7 +96,7 @@ const copyToClipboard = (value) => {
             notificationElement.classList.remove('show');
             notificationElement.classList.add('hide');
             notificationTimeout = null;
-        }, 3000);
+        }, NOTIFICATION_SHOW_TIME);
     });
 };
 
@@ -132,8 +125,12 @@ resolutionYInput.addEventListener('input', (e) => {
     updateUI(width, height, imageResolution, imageAspectRatio);
 });
 
-resolutionXInput.addEventListener('focus', (e) => e.target.select());
-resolutionYInput.addEventListener('focus', (e) => e.target.select());
+[
+    resolutionXInput,
+    resolutionYInput,
+    resolutionXGeneratedInput,
+    resolutionYGeneratedInput,
+].map((element) => element.addEventListener('focus', (e) => e.target.select()));
 
 const getAspectRatio = (aspectRatio) => aspectRatio.split(':').map(Number);
 
