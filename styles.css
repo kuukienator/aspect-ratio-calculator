@@ -3,7 +3,7 @@
     --main-color-dark: #581c87;
     --main-color-light: #d8b4fe; 
     --main-color-lighter: #c084fc;
-    --background-color: #f3f4f6;
+    --background-color: #f5f5f4;
     --text-color-main: #1f2937;
 }
 
@@ -13,21 +13,8 @@
     --main-color-light: #9333ea; 
     --main-color-lighter: #c084fc;
     --background-color: #1f2937;
-    --text-color-main: #f3f4f6;
+    --text-color-main: #f5f5f4;
 }
-
-/*
-@media (prefers-color-scheme: dark) {
-    :root {
-        --main-color: #6b21a8;
-        --main-color-dark: #581c87;
-        --main-color-light: #9333ea; 
-        --main-color-lighter: #c084fc;
-        --background-color: #1f2937;
-        --text-color-main: #f3f4f6;
-    }
-}
-*/
 
 body {
     padding: 0;
@@ -43,9 +30,8 @@ body {
     background-color: var(--background-color);
 }
 
-.drop-zone-text {
+.main-controls {
     border: 0.5rem solid var(--main-color);
-    height: 50vh;
     width: 80vw;
     display: flex;
     justify-content: center;
@@ -54,17 +40,16 @@ body {
     box-sizing: border-box;
     flex-direction: column;
     border-radius: 2rem;
-    cursor: pointer;
     text-align: center;
-    padding: 0.5rem;
+    padding: 1.5rem 0.5rem;
     background-color: var(--main-color-light);
 }
 
-.drop-zone-text > * {
+.main-controls > * {
     margin-bottom: 1rem;
 }
 
-.drop-zone-text input {
+.main-controls input {
     font-size: 1.5rem;
     width: 20vw;
     border-style: solid;
@@ -78,24 +63,8 @@ body {
     color: var(--text-color-main)
 }
 
-.file-upload-input {
-    display: none;
-}
-
-.drop-zone-text.file-hover {
-    border: 0.5rem dotted var(--main-color);
-}
-
-.image-canvas {
-    max-width: 80vw;
-    max-height: 60vh;
-    object-fit: contain;
-    border-radius: 1rem;
-    border: 0.5rem solid var(--main-color);
-}
-
-.main-ui {
-    margin-top: 1rem;
+.main-output {
+    margin-top: 2rem;
     font-size: 1.2rem;
     display: flex;
     flex-direction: column;
@@ -106,16 +75,14 @@ body {
     margin-bottom: 2rem;
 }
 
-.main-ui button {
+.main-output button {
     margin-top: 2rem;
 }
 
 .image-resolution,.image-aspect-ratio {
     font-weight: bold;
-}
-
-.image-aspect-ratio {
     cursor: pointer;
+    text-align: end;
 }
 
 .hidden {
@@ -152,14 +119,7 @@ h1 {
     font-size: 1.5rem;
     text-align: center;
     margin-top: 5rem;
-}
-
-.or {
-    font-weight: bold;
-}
-
-.no-events {
-    pointer-events: none;
+    margin-bottom: 2rem;
 }
 
 footer {
@@ -214,8 +174,9 @@ div[role="button"] >span {
     background-color: var(--main-color);
     color: white;
     padding: 0.5rem;
-    top: -40px;
+    top: -4rem;
     transition: all 0.3s ease-in-out;
+    border-radius: 0.5rem;
 }
 
 .notification.show {
@@ -223,7 +184,7 @@ div[role="button"] >span {
 }
 
 .notification.hide {
-    top: -40px; 
+    top: -4rem; 
 }
 
 @media (min-width: 960px) {
@@ -232,11 +193,11 @@ div[role="button"] >span {
         margin-bottom: 2rem;
     }
 
-    .drop-zone-text, .image-canvas, .main-ui {
+    .main-controls, .image-canvas, .main-output {
         max-width: 60vw;
     }
 
-    .drop-zone-text input {
+    .main-controls input {
         width: 10vw;
     }
 
@@ -247,7 +208,7 @@ div[role="button"] >span {
 }
 
 @media (min-width: 1280px) {
-    .drop-zone-text, .main-ui {
+    .main-controls, .main-output {
         max-width: 40vw;
     }
 }

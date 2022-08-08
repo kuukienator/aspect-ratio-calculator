@@ -88,24 +88,43 @@
                 </span>
             </div>
         </header>
-        <label class="drop-zone-text">
-            <input
-                type="file"
-                class="file-upload-input"
-                accept="image/png, image/jpeg"
-            />
-            <div class="no-events">Drop image/click here for upload</div>
-            <div class="or no-events">or</div>
-            <div class="no-events">
+        <main class="main-controls">
+            <div>
                 <p>Enter resolution:</p>
                 <div>
-                    <input type="number" class="resolution-x" value="1920" /> x
-                    <input type="number" class="resolution-y" value="1080" />
+                    <input
+                        type="number"
+                        class="resolution-x"
+                        value="1920"
+                        aria-label="resolution width"
+                    />
+                    x
+                    <input
+                        type="number"
+                        class="resolution-y"
+                        value="1080"
+                        aria-label="resolution height"
+                    />
                 </div>
             </div>
-        </label>
-        <canvas class="image-canvas hidden"></canvas>
-        <div class="main-ui">
+            <div>
+                <p>Calculate new:</p>
+                <div>
+                    <input
+                        type="number"
+                        class="resolution-x-generated"
+                        aria-label="calculated resolution width"
+                    />
+                    x
+                    <input
+                        type="number"
+                        class="resolution-y-generated"
+                        aria-label="calculated resolution height"
+                    />
+                </div>
+            </div>
+        </main>
+        <section class="main-output">
             <div class="image-resolution-container hidden">
                 <span>Resolution: </span><span class="image-resolution"></span>
             </div>
@@ -114,7 +133,7 @@
                 ><span class="image-aspect-ratio"></span>
             </div>
             <button class="reset-button">Reset</button>
-        </div>
+        </section>
         <div class="notification"></div>
         <footer>
             <a

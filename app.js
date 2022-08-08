@@ -1,7 +1,4 @@
 const root = document.querySelector(':root');
-const dropZone = document.querySelector('.drop-zone-text');
-const dropZoneText = document.querySelector('.drop-zone-text');
-const imageCanvas = document.querySelector('.image-canvas');
 const imageResolution = document.querySelector('.image-resolution');
 const imageAspectRatio = document.querySelector('.image-aspect-ratio');
 const imageResolutionContainer = document.querySelector(
@@ -13,10 +10,15 @@ const imageAspectRatioContainer = document.querySelector(
 const resolutionXInput = document.querySelector('.resolution-x');
 const resolutionYInput = document.querySelector('.resolution-y');
 const resetButton = document.querySelector('.reset-button');
-const fileUploadInput = document.querySelector('.file-upload-input');
 const colorSchemeButton = document.querySelector('.color-scheme-switch');
 const notificationElement = document.querySelector('.notification');
 
+const resolutionXGeneratedInput = document.querySelector(
+    '.resolution-x-generated'
+);
+const resolutionYGeneratedInput = document.querySelector(
+    '.resolution-y-generated'
+);
 const DEFAULT_WIDTH = 1920;
 const DEFAULT_HEIGHT = 1080;
 const COLOR_SCHEME_MAP = {
@@ -30,56 +32,13 @@ const COLOR_SCHEME_MAP = {
     },
 };
 const DEFAULT_COLOR_SCHEME = COLOR_SCHEME_MAP.dark.name;
-
+const NOTIFICATION_SHOW_TIME = 2000;
 let notificationTimeout = null;
 
 const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
 
-const isValidFile = (file) => file && file.type.startsWith('image/');
-
-const readImageFile = (file) =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => resolve(reader.result), false);
-        reader.addEventListener(
-            'error',
-            () => {
-                reject(reader.error);
-                reader.abort();
-            },
-            false
-        );
-
-        reader.readAsDataURL(file);
-    });
-
-const loadImage = (data) =>
-    new Promise((resolve, reject) => {
-        const image = new Image();
-        image.crossOrigin = 'Anonymous';
-        image.src = data;
-        image.onload = () => resolve(image);
-        image.onerror = (e) => reject(e);
-    });
-
-const drawImage = (image, canvas) => {
-    const ctx = canvas.getContext('2d');
-    const width = image.width;
-    const height = image.height;
-    canvas.width = width;
-    canvas.height = height;
-    ctx.drawImage(image, 0, 0);
-
-    canvas.classList.remove('hidden');
-};
-
-const showUI = (resolutionContainer, aspectRatioContainer) => {
-    resolutionContainer.classList.remove('hidden');
-    aspectRatioContainer.classList.remove('hidden');
-};
-
 const updateUI = (width, height, resolutionElement, aspectRatioElement) => {
-    const aspectRatio = (width / height).toFixed(2);
+    const aspectRatio = (width / height).toFixed(3);
     const imageGcd = gcd(width, height);
     const minWidth = Number(width / imageGcd);
     const minHeight = Number(height / imageGcd);
@@ -93,25 +52,9 @@ const updateUI = (width, height, resolutionElement, aspectRatioElement) => {
     resolutionElement.textContent = `${width} x ${height}`;
     aspectRatioElement.textContent = `${minAspectRatio} ${prettyAspectRatio}`;
     aspectRatioElement.dataset.aspectRatio = minAspectRatio;
-};
 
-const processFiles = async (files) => {
-    for (const file of files) {
-        if (isValidFile(file)) {
-            const imageData = await readImageFile(file);
-            const image = await loadImage(imageData);
-
-            dropZoneText.classList.add('hidden');
-            drawImage(image, imageCanvas);
-            updateUI(
-                image.width,
-                image.height,
-                imageResolution,
-                imageAspectRatio
-            );
-            showUI(imageResolutionContainer, imageAspectRatioContainer);
-        }
-    }
+    resolutionXGeneratedInput.value = '';
+    resolutionYGeneratedInput.value = '';
 };
 
 const init = () => {
@@ -124,13 +67,13 @@ const init = () => {
         imageResolution,
         imageAspectRatio
     );
-    showUI(imageResolutionContainer, imageAspectRatioContainer);
-    dropZoneText.classList.remove('hidden');
-    imageCanvas.classList.add('hidden');
+
+    resolutionXInput.focus();
 };
 
 const getCurrentColorSchemeMode = () =>
     window.localStorage.getItem('ARC:colorSchmeMode') || DEFAULT_COLOR_SCHEME;
+
 const setCurrentColorSchemeMode = (value) => {
     window.localStorage.setItem('ARC:colorSchmeMode', value);
     root.classList.remove(
@@ -155,7 +98,7 @@ const copyToClipboard = (value) => {
             notificationElement.classList.remove('show');
             notificationElement.classList.add('hide');
             notificationTimeout = null;
-        }, 3000);
+        }, NOTIFICATION_SHOW_TIME);
     });
 };
 
@@ -168,27 +111,6 @@ colorSchemeButton.addEventListener('click', () => {
             ? COLOR_SCHEME_MAP.light.name
             : COLOR_SCHEME_MAP.dark.name
     );
-});
-
-dropZone.addEventListener('drop', (e) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    dropZoneText.classList.remove('file-hover');
-    processFiles(files);
-});
-dropZone.addEventListener('dragenter', (e) => {
-    e.preventDefault();
-    dropZoneText.classList.add('file-hover');
-});
-dropZone.addEventListener('dragover', (e) => e.preventDefault());
-dropZone.addEventListener('dragleave', (e) => {
-    e.preventDefault();
-    dropZoneText.classList.remove('file-hover');
-});
-
-fileUploadInput.addEventListener('change', (e) => {
-    e.preventDefault();
-    processFiles(e.target.files);
 });
 
 resolutionXInput.addEventListener('input', (e) => {
@@ -205,8 +127,39 @@ resolutionYInput.addEventListener('input', (e) => {
     updateUI(width, height, imageResolution, imageAspectRatio);
 });
 
-resolutionXInput.addEventListener('focus', (e) => e.target.select());
-resolutionYInput.addEventListener('focus', (e) => e.target.select());
+[
+    resolutionXInput,
+    resolutionYInput,
+    resolutionXGeneratedInput,
+    resolutionYGeneratedInput,
+].map((element) => element.addEventListener('focus', (e) => e.target.select()));
+
+const getAspectRatio = (aspectRatio) => aspectRatio.split(':').map(Number);
+
+const getYValue = (x, aspectRatio) => {
+    const [xRatio, yRatio] = getAspectRatio(aspectRatio);
+    return Math.round((x * yRatio) / xRatio);
+};
+
+const getXValue = (y, aspectRatio) => {
+    const [xRatio, yRatio] = getAspectRatio(aspectRatio);
+    console.log(xRatio, yRatio);
+    return Math.round((y * xRatio) / yRatio);
+};
+
+resolutionXGeneratedInput.addEventListener('input', (e) => {
+    resolutionYGeneratedInput.value = getYValue(
+        e.target.value,
+        imageAspectRatio.dataset.aspectRatio
+    );
+});
+
+resolutionYGeneratedInput.addEventListener('input', (e) => {
+    resolutionXGeneratedInput.value = getXValue(
+        e.target.value,
+        imageAspectRatio.dataset.aspectRatio
+    );
+});
 
 resetButton.addEventListener('click', () => init());
 
