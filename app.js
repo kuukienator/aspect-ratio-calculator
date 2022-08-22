@@ -39,6 +39,7 @@ const COLOR_SCHEME_MAP = {
 const DEFAULT_COLOR_SCHEME = COLOR_SCHEME_MAP.dark.name;
 const NOTIFICATION_SHOW_TIME = 2000;
 const RESOLUTION_PERSIS_TIME = 2000;
+const MAX_HISTORY_ENTRIES = 10;
 let notificationTimeout = null;
 let inputResolutionChangeTimeout = null;
 
@@ -89,11 +90,15 @@ const addResolutionToHistory = (width, height) => {
     const entry = { width, height, key: width + 'x' + height };
     StorageProvider.set(
         'ARC:resolutionHistory',
-        JSON.stringify([
-            entry,
-            ...history.filter((item) => item.key !== entry.key),
-        ])
+        JSON.stringify(
+            [entry, ...history.filter((item) => item.key !== entry.key)].slice(
+                0,
+                MAX_HISTORY_ENTRIES
+            )
+        )
     );
+
+    renderHistory();
 };
 
 const init = () => {
@@ -107,6 +112,7 @@ const init = () => {
         imageAspectRatio
     );
 
+    renderHistory();
     resolutionXInput.focus();
 };
 
@@ -159,10 +165,6 @@ resolutionXInput.addEventListener('input', (e) => {
     updateUI(width, height, imageResolution, imageAspectRatio);
     clearTimeout(inputResolutionChangeTimeout);
     inputResolutionChangeTimeout = setTimeout(() => {
-        console.log(
-            Number(resolutionXInput.value),
-            Number(resolutionYInput.value)
-        );
         addResolutionToHistory(width, height);
     }, RESOLUTION_PERSIS_TIME);
 });
@@ -174,10 +176,6 @@ resolutionYInput.addEventListener('input', (e) => {
     updateUI(width, height, imageResolution, imageAspectRatio);
     clearTimeout(inputResolutionChangeTimeout);
     inputResolutionChangeTimeout = setTimeout(() => {
-        console.log(
-            Number(resolutionXInput.value),
-            Number(resolutionYInput.value)
-        );
         addResolutionToHistory(width, height);
     }, RESOLUTION_PERSIS_TIME);
 });
@@ -200,6 +198,29 @@ const getXValue = (y, aspectRatio) => {
     const [xRatio, yRatio] = getAspectRatio(aspectRatio);
     console.log(xRatio, yRatio);
     return Math.round((y * xRatio) / yRatio);
+};
+
+const renderHistory = () => {
+    const history = loadResolutionHistory();
+    const historyList = document.createElement('ul');
+    historyList.classList.add('history-list');
+    history.forEach((entry) => {
+        const li = document.createElement('li');
+        li.textContent = `${entry.width} x ${entry.height}`;
+        li.addEventListener('click', () => {
+            resolutionXInput.value = entry.width;
+            resolutionYInput.value = entry.height;
+            updateUI(
+                entry.width,
+                entry.height,
+                imageResolution,
+                imageAspectRatio
+            );
+            if (window.innerWidth < 960) overlay.classList.add('hide');
+        });
+        historyList.appendChild(li);
+    });
+    overlayContent.replaceChildren(historyList);
 };
 
 resolutionXGeneratedInput.addEventListener('input', (e) => {
@@ -225,27 +246,8 @@ overlay.addEventListener('click', (e) => {
 });
 
 historyButton.addEventListener('click', () => {
-    const history = loadResolutionHistory();
     overlay.classList.remove('hide');
-    const historyList = document.createElement('ul');
-    historyList.classList.add('history-list');
-    history.forEach((entry) => {
-        const li = document.createElement('li');
-        li.textContent = `${entry.width} x ${entry.height}`;
-        li.addEventListener('click', () => {
-            resolutionXInput.value = entry.width;
-            resolutionYInput.value = entry.height;
-            updateUI(
-                entry.width,
-                entry.height,
-                imageResolution,
-                imageAspectRatio
-            );
-            overlay.classList.add('hide');
-        });
-        historyList.appendChild(li);
-    });
-    overlayContent.replaceChildren(historyList);
+    renderHistory();
 });
 
 closeOverlayButton.addEventListener('click', () =>

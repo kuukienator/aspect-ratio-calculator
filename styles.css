@@ -34,7 +34,6 @@ body {
 
 .main-controls {
     border: 0.5rem solid var(--main-color);
-    width: 80vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,6 +45,8 @@ body {
     padding: 1.5rem 0.5rem;
     background-color: var(--main-color-light);
     position: relative;
+    flex-grow: 2;
+    width: 65%;
 }
 
 .main-controls > * {
@@ -205,10 +206,12 @@ div[role="button"] >span {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 2;
 }
 
 .overlay-headline {
     font-size: 1.75rem;
+    margin: 1rem 0;
 }
 
 .overlay-content-wrapper {
@@ -224,6 +227,7 @@ div[role="button"] >span {
 
     min-height: 50vh;
     max-height: 80vh;
+    overflow: auto;
 }
 
 .overlay.hide {
@@ -233,6 +237,7 @@ div[role="button"] >span {
 .history-list {
     padding: 0;
     margin: 0;
+    border-top: 0.2rem solid;
 }
 
 .history-list > li {
@@ -249,13 +254,19 @@ div[role="button"] >span {
     background: var(--main-color-lighter); 
 }
 
+main {
+    display: flex;
+    width: 80vw;
+    justify-content: center;
+}
+
 @media (min-width: 960px) {
     h1 {
         font-size: 2rem;
         margin-bottom: 2rem;
     }
 
-    .main-controls, .image-canvas, .main-output, .overlay-content-wrapper {
+    .main-output {
         max-width: 60vw;
     }
 
@@ -267,10 +278,54 @@ div[role="button"] >span {
         top: 2rem;
         right: 2rem;
     }
+
+    .main-controls {
+        margin-right: 1rem;
+        max-width: 800px;
+    }
+
+    .overlay-content-wrapper {
+        font-size: 1rem;
+        width: initial;
+        border: 0.5rem solid var(--main-color);
+        background-color: var(--main-color-light);
+        padding: 0.5rem 0.5rem;
+        max-height: initial;
+
+    }
+
+    .overlay-headline {
+        margin: 1rem 0;
+        font-size: 1.5rem;
+    }
+
+    .overlay {
+        flex-grow: 1;
+        width: 35%;
+        position: relative;
+        display: block !important;
+        max-width: 300px;
+
+    }
+    .history-list {
+        border-top: none;
+    }
+
+    .history-list > li {
+        margin-bottom: 0.5rem;
+    }
+
+    .history-button {
+        display: none;
+    }
+
+    .close-overlay-button {
+        display: none;
+    }
 }
 
 @media (min-width: 1280px) {
-    .main-controls, .main-output, .overlay-content-wrapper {
+    .main-output {
         max-width: 40vw;
     }
 }

@@ -88,39 +88,66 @@
                 </span>
             </div>
         </header>
-        <main class="main-controls">
-            <div>
-                <p>Enter resolution:</p>
+        <main>
+            <div class="main-controls">
                 <div>
-                    <input
-                        type="number"
-                        class="resolution-x"
-                        value="1920"
-                        aria-label="resolution width"
-                    />
-                    x
-                    <input
-                        type="number"
-                        class="resolution-y"
-                        value="1080"
-                        aria-label="resolution height"
-                    />
+                    <p>Enter resolution:</p>
+                    <div>
+                        <input
+                            type="number"
+                            class="resolution-x"
+                            value="1920"
+                            aria-label="resolution width"
+                        />
+                        x
+                        <input
+                            type="number"
+                            class="resolution-y"
+                            value="1080"
+                            aria-label="resolution height"
+                        />
+                    </div>
+                </div>
+                <div>
+                    <p>Calculate new:</p>
+                    <div>
+                        <input
+                            type="number"
+                            class="resolution-x-generated"
+                            aria-label="calculated resolution width"
+                        />
+                        x
+                        <input
+                            type="number"
+                            class="resolution-y-generated"
+                            aria-label="calculated resolution height"
+                        />
+                    </div>
                 </div>
             </div>
-            <div>
-                <p>Calculate new:</p>
-                <div>
-                    <input
-                        type="number"
-                        class="resolution-x-generated"
-                        aria-label="calculated resolution width"
-                    />
-                    x
-                    <input
-                        type="number"
-                        class="resolution-y-generated"
-                        aria-label="calculated resolution height"
-                    />
+            <div class="overlay hide">
+                <div class="overlay-content-wrapper">
+                    <p class="overlay-headline">History</p>
+                    <div role="button" class="close-overlay-button">
+                        <span>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-x"
+                            >
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="overlay-content"></div>
                 </div>
             </div>
         </main>
@@ -146,31 +173,6 @@
                 >@kuukienator</a
             >
         </footer>
-        <div class="overlay hide">
-            <div class="overlay-content-wrapper">
-                <p class="overlay-headline">History</p>
-                <div role="button" class="close-overlay-button">
-                    <span>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-x"
-                        >
-                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                        </svg>
-                    </span>
-                </div>
-                <div class="overlay-content"></div>
-            </div>
-        </div>
         <script src="./app.js" type="module"></script>
     </body>
 </html>
